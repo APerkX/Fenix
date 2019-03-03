@@ -16,12 +16,20 @@
 	<!-- marshalling -->
 	<jackson.version>2.9.8</jackson.version>
 
+	<!-- persistence -->
+	<hibernate.version>5.2.10.Final</hibernate.version>
+	<mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+	
 	<!-- maven plugins -->
 	<maven-war-plugin.version>2.6</maven-war-plugin.version>
+
+	<!-- util -->
+	<guava.version>21.0</guava.version>
 	
   </properties>
   
   <dependencies>
+  	
   	
   	<!-- Spring -->
   	<dependency>
@@ -30,12 +38,49 @@
 	    <version>${org.springframework.version}</version>
 	</dependency>	
 	
+	<!-- persistence -->
+	<dependency><!-- permette di utilizzare l'annotation @EnableTransactionManagement nella classe HibernateConfig -->
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${org.springframework.version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-core</artifactId>
+    	<version>${hibernate.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-entitymanager</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-ehcache</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql-connector-java.version}</version>
+		<scope>runtime</scope>
+	</dependency>
+	
+	
 	<!-- marshalling -->
 	<dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
         <artifactId>jackson-databind</artifactId>
         <version>${jackson.version}</version>
     </dependency>
+    
+	<!-- utils -->
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>${guava.version}</version>
+	</dependency>
+    
   	
   	
   </dependencies>	  
