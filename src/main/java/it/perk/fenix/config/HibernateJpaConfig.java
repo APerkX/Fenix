@@ -30,7 +30,7 @@ import com.google.common.base.Preconditions;
  */
 @Configuration
 @EnableTransactionManagement
-//@PropertySource({ "classpath:persistence-mysql.properties" }) // va creato se non esiste in "src/main/resources"
+@PropertySource({ "classpath:persistence-mysql.properties" }) // va creato se non esiste in "src/main/resources"
 @ComponentScan({"it.perk.fenix"}) // bastano i package contenenti i Dao e i SRV 
 public class HibernateJpaConfig {
 

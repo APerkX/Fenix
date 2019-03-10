@@ -15,7 +15,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * @author Perk
  * 
- * Classe che dalla versione 5.0.0 di Spring sostituisce completamente il web.xml
+ * Classe che dalla versione 5.0.0 di Spring (e Servlet 3.0+ ) sostituisce completamente il web.xml
  *
  */
 public class WebAppInitializer implements WebApplicationInitializer {

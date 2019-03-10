@@ -4,7 +4,16 @@
 package it.perk.fenix.model.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * @author Perk
@@ -12,7 +21,9 @@ import java.util.Date;
  * Entità che mappa la tabella UTENTE
  *
  */
-public class Utente implements Serializable{
+@Entity
+@Table(name = "UTENTE")
+public class Utente implements Serializable {
 
 	/**
 	 * The Constant serialVersionUID.
@@ -22,47 +33,68 @@ public class Utente implements Serializable{
 	/**
 	 * Identificativo utente.
 	 */
-	private final Long idUtente;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "IDUTENTE")
+	private Long idUtente;
 
 	/**
 	 * Username.
 	 */
-	private final String username;
+	@Column(name = "USERNAME")
+	private String username;
 
 	/**
 	 * Nome.
 	 */
-	private final String nome;
+	@Column(name = "NOME")
+	private String nome;
 	
 	/**
 	 * Cognome.
 	 */
-	private final String cognome;
+	@Column(name = "COGNOME")
+	private String cognome;
 	
 	/**
 	 * Codice fiscale.
 	 */
-	private final String codiceFiscale;
+	@Column(name = "CODFIS")
+	private String codiceFiscale;
 
 	/**
 	 * Email.
 	 */
-	private final String email;
+	@Column(name = "EMAIL")
+	private String email;
 
 	/**
 	 * Registro riservato.
 	 */
-	private final Long registroRiservato;
+	@Column(name = "REGISTRORISERVATO")
+	private Long registroRiservato;
 	
 	/**
 	 * Data attivazione.
 	 */
-	private final Date dataAttivazione;
+	@Column(name = "DATAATTIVAZIONE")
+	private Date dataAttivazione;
 
 	/**
 	 * Data disattivazione.
 	 */
-	private final Date dataDisattivazione;
+	@Column(name = "DATADISATTIVAZIONE")
+	private Date dataDisattivazione;
+	
+	@OneToMany(mappedBy = "utente")
+	private Collection<NodoUtenteRuolo> nodiRuoli;
+	
+	/**
+	 * Default Constructor
+	 */
+	public Utente() {
+		super();
+	}
 	
 	/**
 	 * 
@@ -143,6 +175,20 @@ public class Utente implements Serializable{
 	 */
 	public Date getDataDisattivazione() {
 		return dataDisattivazione;
+	}
+
+	/**
+	 * @return the nodiRuoli
+	 */
+	public Collection<NodoUtenteRuolo> getNodiRuoli() {
+		return nodiRuoli;
+	}
+
+	/**
+	 * @param nodiRuoli the nodiRuoli to set
+	 */
+	public void setNodiRuoli(Collection<NodoUtenteRuolo> nodiRuoli) {
+		this.nodiRuoli = nodiRuoli;
 	}
 
 }
