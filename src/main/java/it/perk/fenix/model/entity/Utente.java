@@ -122,10 +122,24 @@ public class Utente implements Serializable {
 	}
 
 	/**
+	 * @param idUtente the idUtente to set
+	 */
+	public void setIdUtente(Long idUtente) {
+		this.idUtente = idUtente;
+	}
+
+	/**
 	 * @return the username
 	 */
 	public String getUsername() {
 		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -136,10 +150,24 @@ public class Utente implements Serializable {
 	}
 
 	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
 	 * @return the cognome
 	 */
 	public String getCognome() {
 		return cognome;
+	}
+
+	/**
+	 * @param cognome the cognome to set
+	 */
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
 	}
 
 	/**
@@ -150,10 +178,24 @@ public class Utente implements Serializable {
 	}
 
 	/**
+	 * @param codiceFiscale the codiceFiscale to set
+	 */
+	public void setCodiceFiscale(String codiceFiscale) {
+		this.codiceFiscale = codiceFiscale;
+	}
+
+	/**
 	 * @return the email
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
@@ -164,6 +206,13 @@ public class Utente implements Serializable {
 	}
 
 	/**
+	 * @param registroRiservato the registroRiservato to set
+	 */
+	public void setRegistroRiservato(Long registroRiservato) {
+		this.registroRiservato = registroRiservato;
+	}
+
+	/**
 	 * @return the dataAttivazione
 	 */
 	public Date getDataAttivazione() {
@@ -171,10 +220,24 @@ public class Utente implements Serializable {
 	}
 
 	/**
+	 * @param dataAttivazione the dataAttivazione to set
+	 */
+	public void setDataAttivazione(Date dataAttivazione) {
+		this.dataAttivazione = dataAttivazione;
+	}
+
+	/**
 	 * @return the dataDisattivazione
 	 */
 	public Date getDataDisattivazione() {
 		return dataDisattivazione;
+	}
+
+	/**
+	 * @param dataDisattivazione the dataDisattivazione to set
+	 */
+	public void setDataDisattivazione(Date dataDisattivazione) {
+		this.dataDisattivazione = dataDisattivazione;
 	}
 
 	/**

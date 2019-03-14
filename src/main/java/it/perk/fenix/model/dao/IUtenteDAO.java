@@ -5,6 +5,7 @@ package it.perk.fenix.model.dao;
 
 import java.util.List;
 
+import it.perk.fenix.dto.UtenteDTO;
 import it.perk.fenix.model.entity.Utente;
 
 /**
@@ -13,7 +14,7 @@ import it.perk.fenix.model.entity.Utente;
  */
 public interface IUtenteDAO {
 	
-	Utente getByUsername(final String username);
+	UtenteDTO getByUsername(final String username);
 	
 	Utente findById(long id);
 
