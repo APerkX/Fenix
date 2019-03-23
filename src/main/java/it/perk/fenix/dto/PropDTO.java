@@ -32,6 +32,11 @@ public class PropDTO implements Serializable {
 	private String infoMsg;
 	
 	/**
+	 * numero elementi.
+	 */
+	private Integer countProp;
+	
+	/**
 	 * Parametri.
 	 */
 	private Map<String, String> parameters;
@@ -91,6 +96,21 @@ public class PropDTO implements Serializable {
 	public void setInfoMsg(String infoMsg) {
 		this.infoMsg = infoMsg;
 	}
+
+	/**
+	 * @return the countProp
+	 */
+	public Integer getCountProp() {
+		return countProp;
+	}
+
+	/**
+	 * @param countProp the countProp to set
+	 */
+	public void setCountProp(Integer countProp) {
+		this.countProp = countProp;
+	}
+	
 	
 	
 }

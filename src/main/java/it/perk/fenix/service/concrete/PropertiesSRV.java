@@ -51,8 +51,8 @@ public class PropertiesSRV implements IPropertiesSRV {
 			List<Property> result = propertiesDAO.getAll();
 			
 			if (result != null && !result.isEmpty()) {
+				output = new HashMap<>();
 				for (Property p : result) {
-					output = new HashMap<>();
 					output.put(p.getKey(), p.getValue());
 				}
 				

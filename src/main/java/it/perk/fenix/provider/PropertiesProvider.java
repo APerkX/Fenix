@@ -170,6 +170,7 @@ public class PropertiesProvider implements Serializable  {
 		if (parameters != null && parameters.size() > 0) {
 			output.setInfoMsg("I PARAMETRI SONO STATI CARICATI CON SUCCESSO");
 			output.setParameters(parameters);
+			output.setCountProp(parameters.size());
 		} else {
 			output.setInfoMsg("NESSUN PARAMETRO CARICATO");
 		}
