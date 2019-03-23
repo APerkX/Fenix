@@ -24,6 +24,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.google.common.base.Preconditions;
 
+import it.perk.fenix.provider.PropertiesProvider;
+
 /**
  * @author Perk
  *
@@ -31,7 +33,8 @@ import com.google.common.base.Preconditions;
 @Configuration
 @EnableTransactionManagement
 @PropertySource({ "classpath:persistence-mysql.properties" }) // va creato se non esiste in "src/main/resources"
-@ComponentScan({"it.perk.fenix"}) // bastano i package contenenti i Dao e i SRV 
+@ComponentScan({"it.perk.service"}) // bastano i package contenenti i Dao e i SRV 
+@ComponentScan({"it.perk.model.dao"})  
 public class HibernateJpaConfig {
 
 	@Autowired
@@ -79,7 +82,7 @@ public class HibernateJpaConfig {
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
-	}	
+	}
 	
 	//metodo per il recupero di alcune properites di Hibernate
 	final Properties additionalProperties() {

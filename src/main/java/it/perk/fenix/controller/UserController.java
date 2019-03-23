@@ -8,11 +8,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 
 import it.perk.fenix.dto.UtenteDTO;
 import it.perk.fenix.model.entity.Utente;
@@ -43,8 +43,8 @@ public class UserController {
 		return utenti;
 	}
 
-	@GetMapping(path = "/user") 
-	public UtenteDTO findUser(){
+	@GetMapping(path = "/user/{username}") 
+	public UtenteDTO findUserForLogin(@PathVariable("username") String username){
 		UtenteDTO utente = utenteSRV.getByUsername("biagio.mazzotta");
 		return Preconditions.checkNotNull(utente);
 	}

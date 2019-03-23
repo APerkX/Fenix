@@ -3,6 +3,7 @@
  */
 package it.perk.fenix.model.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import it.perk.fenix.dto.UtenteDTO;
@@ -12,7 +13,7 @@ import it.perk.fenix.model.entity.Utente;
  * @author Perk
  *
  */
-public interface IUtenteDAO {
+public interface IUtenteDAO extends Serializable {
 	
 	UtenteDTO getByUsername(final String username);
 	

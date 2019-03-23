@@ -35,7 +35,7 @@ public class Ruolo implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDRUOLO")
-	private long idRuolo;
+	private Long idRuolo;
 
 	/**
 	 * Nome ruolo.

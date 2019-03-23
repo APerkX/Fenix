@@ -9,6 +9,7 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -31,6 +32,11 @@ import it.perk.fenix.model.entity.Utente;
 public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6267126845956203257L;
+
+	/**
 	 * Logger.
 	 */
 	private static final Logger LOGGER = Logger.getLogger(UtenteDAO.class.getName());
@@ -51,7 +57,11 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 			CriteriaQuery<Utente> cq = cb.createQuery(Utente.class);
 			
 			Root<Utente> utente = cq.from(Utente.class);
-			Predicate userNamePredicate = cb.equal(utente.get("username"), username);
+			
+			// viene fatto l'upper del username e confrontato con quello dato in input 
+			Expression<String> upperUsername = cb.upper(utente.get("username"));
+			Predicate userNamePredicate = cb.equal(upperUsername, username.toUpperCase());
+
 			cq.where(userNamePredicate);
 			
 			TypedQuery<Utente> query = em.createQuery(cq);

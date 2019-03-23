@@ -30,7 +30,7 @@ public class UtenteSRV implements IUtenteSRV {
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UtenteDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(UtenteSRV.class.getName());
 	
 	@Autowired
 	private IUtenteDAO utenteDao;
