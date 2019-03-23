@@ -26,6 +26,10 @@
 	<!-- util -->
 	<guava.version>21.0</guava.version>
 	
+	<!-- Logback -->
+	<logback.version>1.2.3</logback.version>
+	<slf4j.version>1.8.0-beta2</slf4j.version>
+	
   </properties>
   
   <dependencies>
@@ -81,7 +85,23 @@
 		<version>${guava.version}</version>
 	</dependency>
     
-  	
+    <!-- Logback -->
+  	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-core</artifactId>
+	    <version>${logback.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>${slf4j.version}</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>${logback.version}</version>
+	</dependency>
   	
   </dependencies>	  
   
