@@ -4,16 +4,15 @@
 package it.perk.fenix.provider;
 
 import java.io.Serializable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-
+import it.perk.fenix.dto.PropDTO;
 import it.perk.fenix.enums.PropertiesNameEnum;
 import it.perk.fenix.service.facade.IPropertiesFacadeSRV;
 
@@ -70,7 +69,7 @@ public class PropertiesProvider implements Serializable  {
 	 * Costruttore.
 	 */
 	public PropertiesProvider() {
-//		propertiesSRV = (IPropertiesFacadeSRV) ApplicationContextProvider.getApplicationContext().getBean("propertiesSRV");
+		propertiesSRV = (IPropertiesFacadeSRV) ApplicationContextProvider.getApplicationContext().getBean("propertiesSRV");
 		refreshProperties();
 	}
 	
@@ -151,38 +150,30 @@ public class PropertiesProvider implements Serializable  {
 	
 	/**
 	 * 
-	 * tags:
-	 * @return
+	 * @return PropDTO 
 	 */
-	public String toJson() {
+	public PropDTO toJson() {
 		waitUpdating();
-		StringBuilder sb = new StringBuilder("<html><head></head><body>");
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
-//		InetAddress localhost = null;
-//		try {
-//			localhost = InetAddress.getLocalHost();
-//		} catch (UnknownHostException e) {
-//			LOGGER.warn("Errore nel recupero dell'indirizzo locale della macchina: ", e);
-//		}
-//		sb.append("ULTIMO REFRESH: <" + sdf.format(lastRefreshTime) + "> - IPSERVER: " + localhost);
-//		if (parameters != null && parameters.size() > 0) {
-//			sb.append("<table border=\"1\">");
-//			sb.append("<tr>");
-//			sb.append("<th>Key</th>");
-//			sb.append("<th>Value</th> ");
-//			sb.append("</tr>");
-//			SortedSet<String> lhs = new TreeSet<String>(parameters.keySet());
-//			for (String key : lhs) {
-//				sb.append("<tr>");
-//				sb.append("<td>" + key + "</td>");
-//				sb.append("<td>" + parameters.get(key) + "</td> ");
-//				sb.append("</tr>");
-//			}
-//			sb.append("</table></body></html>");
-//		} else {
-//			sb.append("NESSUN PARAMETRO CARICATO");
-//		}
-		return sb.toString();
+		PropDTO output = new PropDTO();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:SS");
+		InetAddress localhost = null;
+		try {
+			localhost = InetAddress.getLocalHost();
+			output.setIpServer(localhost.toString());
+		} catch (UnknownHostException e) {
+			// warn
+			LOGGER.info("Errore nel recupero dell'indirizzo locale della macchina: ");
+			output.setIpServer("Non è stato possibile recuperare l'indirizzo locale della macchina");
+		}
+		output.setLastRefreshTime(sdf.format(lastRefreshTime));
+		
+		if (parameters != null && parameters.size() > 0) {
+			output.setInfoMsg("I PARAMETRI SONO STATI CARICATI CON SUCCESSO");
+			output.setParameters(parameters);
+		} else {
+			output.setInfoMsg("NESSUN PARAMETRO CARICATO");
+		}
+		return output;
 	}
 
 }

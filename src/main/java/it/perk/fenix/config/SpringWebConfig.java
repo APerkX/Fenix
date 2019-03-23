@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "it.perk.fenix.controller")
+@ComponentScan(basePackages = "it.perk.fenix.provider")
 public class SpringWebConfig {
 
 }
