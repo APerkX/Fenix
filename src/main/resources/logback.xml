@@ -1,4 +1,4 @@
-<configuration>
+<configuration debug="true">
 
    <!--  <appender name="map" class="com.baeldung.logback.MapAppender">
         <prefix>test</prefix>

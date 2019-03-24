@@ -6,13 +6,13 @@ package it.perk.fenix.service.concrete;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.perk.fenix.enums.PropertiesNameEnum;
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.IPropertiesDAO;
 import it.perk.fenix.model.entity.Property;
 import it.perk.fenix.service.IPropertiesSRV;
@@ -33,7 +33,7 @@ public class PropertiesSRV implements IPropertiesSRV {
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(PropertiesSRV.class.getName());
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(PropertiesSRV.class.getName());
 	
 	/**
 	 * Dao gestione properties.
@@ -59,7 +59,7 @@ public class PropertiesSRV implements IPropertiesSRV {
 			}
 			
 		} catch (Exception e) {
-			LOGGER.info("Errore durante il recupero delle properties dal DB " + e.getMessage());
+			LOGGER.error("Errore durante il recupero delle properties dal DB ", e);
 		}
 		
 		return output;
