@@ -134,7 +134,7 @@ public class PropertiesProvider implements Serializable  {
 			if (parameters != null && parameters.size() > 0) {
 				LOGGER.info("PROPERTIES PROVIDER refreshProperties(): Caricate i seguenti parametri:");
 				for (Entry<String, String> entry: parameters.entrySet()) {
-					LOGGER.info("PROPERTIES PROVIDER refreshProperties(): " + entry.getKey() + "=" + entry.getValue());
+					LOGGER.info("PROPERTIES PROVIDER refreshProperties(): " + entry.getKey() + " = " + entry.getValue());
 				}
 			} else {
 				LOGGER.warn("PROPERTIES PROVIDER refreshProperties(): Attenzione: non risulta essere stato caricato nessun parametro!");

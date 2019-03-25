@@ -32,11 +32,11 @@ public class PropertiesDAO extends AbstractJpaDAO<Property> implements IProperti
 	
 	/**
 	 * Cotruttore che definisce l'entità con cui si 
-	 * andarà ad operare con i metodi generici.
+	 * andrà ad operare con i metodi generici.
 	 * 
 	 */
 	public PropertiesDAO(){
-	      setClazz(Property.class );
+	      setClazz(Property.class);
 	}
 
 	@Override
