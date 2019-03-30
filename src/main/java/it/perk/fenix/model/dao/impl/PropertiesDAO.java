@@ -5,10 +5,10 @@ package it.perk.fenix.model.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.stereotype.Repository;
 
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.AbstractJpaDAO;
 import it.perk.fenix.model.dao.IPropertiesDAO;
 import it.perk.fenix.model.entity.Property;
@@ -28,15 +28,15 @@ public class PropertiesDAO extends AbstractJpaDAO<Property> implements IProperti
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(PropertiesDAO.class.getName());
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(PropertiesDAO.class.getName());
 	
 	/**
 	 * Cotruttore che definisce l'entità con cui si 
-	 * andarà ad operare con i metodi generici.
+	 * andrà ad operare con i metodi generici.
 	 * 
 	 */
 	public PropertiesDAO(){
-	      setClazz(Property.class );
+	      setClazz(Property.class);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class PropertiesDAO extends AbstractJpaDAO<Property> implements IProperti
 		try {
 			output = findAll();
 		} catch (Exception e) {
-			LOGGER.info("Errore durante il recupero delle properties dal DB " + e.getMessage());
+			LOGGER.error("Errore durante il recupero delle properties dal DB ", e);
 		}
 		return output;
 	}

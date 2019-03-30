@@ -3,8 +3,6 @@
  */
 package it.perk.fenix.model.dao.impl;
 
-import java.util.logging.Logger;
-
 import javax.persistence.EntityExistsException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,6 +17,7 @@ import it.perk.fenix.dto.RuoloDTO;
 import it.perk.fenix.dto.UfficiRuoliDTO;
 import it.perk.fenix.dto.UfficioDTO;
 import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.AbstractJpaDAO;
 import it.perk.fenix.model.dao.IUtenteDAO;
 import it.perk.fenix.model.entity.NodoUtenteRuolo;
@@ -39,7 +38,7 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UtenteDAO.class.getName());
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(UtenteDAO.class.getName());
 	
 	/**
 	 * Predefinito.
@@ -83,7 +82,7 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 			}
 			
 		} catch (Exception e) {
-			LOGGER.info("Errore durante la ricerca dell'utente : " + username + " " + e.getMessage());
+			LOGGER.error("Errore durante la ricerca dell'utente : " + username, e);
 		}
 		return output;
 	}
@@ -96,9 +95,9 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 				create(entity);
 			}
 		} catch (EntityExistsException e) {
-			LOGGER.warning("Attenzione Entità gia presente nella Tabella Utente" + e.getMessage());
+			LOGGER.warn("Attenzione Entità gia presente nella Tabella Utente", e);
 		} catch (Exception e) {
-			LOGGER.info("Errore durante l'inserimento utente Livello Dao : " + e.getMessage());
+			LOGGER.error("Errore durante l'inserimento utente Livello Dao : ", e);
 		} 
 		
 	}

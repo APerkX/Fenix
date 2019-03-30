@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.Logger;
 
 import it.perk.fenix.dto.PropDTO;
 import it.perk.fenix.enums.PropertiesNameEnum;
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.service.facade.IPropertiesFacadeSRV;
 
 /**
@@ -33,7 +33,7 @@ public class PropertiesProvider implements Serializable  {
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(PropertiesProvider.class.getName());
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(PropertiesProvider.class.getName());
 	
 	/**
 	 * Quanto di tempo in ms in fase di attesa di aggiornamento.
@@ -134,15 +134,13 @@ public class PropertiesProvider implements Serializable  {
 			if (parameters != null && parameters.size() > 0) {
 				LOGGER.info("PROPERTIES PROVIDER refreshProperties(): Caricate i seguenti parametri:");
 				for (Entry<String, String> entry: parameters.entrySet()) {
-					LOGGER.info("PROPERTIES PROVIDER refreshProperties(): " + entry.getKey() + "=" + entry.getValue());
+					LOGGER.info("PROPERTIES PROVIDER refreshProperties(): " + entry.getKey() + " = " + entry.getValue());
 				}
 			} else {
-				// warn
-				LOGGER.info("PROPERTIES PROVIDER refreshProperties(): Attenzione: non risulta essere stato caricato nessun parametro!");
+				LOGGER.warn("PROPERTIES PROVIDER refreshProperties(): Attenzione: non risulta essere stato caricato nessun parametro!");
 			}
 		} catch (Exception e) {
-			// error
-			LOGGER.info("PROPERTIES PROVIDER refreshProperties(): Errore durante il refresh delle properties:" + e);
+			LOGGER.error("PROPERTIES PROVIDER refreshProperties(): Errore durante il refresh delle properties:", e);
 		} finally {
 			isUpdating = false;
 		}
@@ -161,8 +159,7 @@ public class PropertiesProvider implements Serializable  {
 			localhost = InetAddress.getLocalHost();
 			output.setIpServer(localhost.toString());
 		} catch (UnknownHostException e) {
-			// warn
-			LOGGER.info("Errore nel recupero dell'indirizzo locale della macchina: ");
+			LOGGER.warn("Errore nel recupero dell'indirizzo locale della macchina: ");
 			output.setIpServer("Non è stato possibile recuperare l'indirizzo locale della macchina");
 		}
 		output.setLastRefreshTime(sdf.format(lastRefreshTime));

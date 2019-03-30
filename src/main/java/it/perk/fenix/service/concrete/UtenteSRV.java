@@ -3,15 +3,13 @@
  */
 package it.perk.fenix.service.concrete;
 
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.IUtenteDAO;
-import it.perk.fenix.model.dao.impl.UtenteDAO;
 import it.perk.fenix.service.IUtenteSRV;
 
 /**
@@ -30,7 +28,7 @@ public class UtenteSRV implements IUtenteSRV {
 	/**
 	 * Logger.
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UtenteSRV.class.getName());
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(UtenteSRV.class.getName());
 	
 	@Autowired
 	private IUtenteDAO utenteDao;
@@ -42,7 +40,7 @@ public class UtenteSRV implements IUtenteSRV {
 		try {
 			utente = utenteDao.getByUsername(username);
 		} catch (Exception e) {
-			LOGGER.info("Errore durante la ricerca dell'utente : " + username + " " + e.getMessage());
+			LOGGER.error("Errore durante la ricerca dell'utente : " + username , e);
 		}
 		
 		return utente;

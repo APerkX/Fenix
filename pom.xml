@@ -27,7 +27,7 @@
 	<guava.version>21.0</guava.version>
 	
 	<!-- Logback -->
-	<logback.version>1.2.3</logback.version>
+	<logback.version>1.3.0-alpha4</logback.version><!-- ultima versione disponibile altrimenti non funziona il binding con slf4j -->
 	<slf4j.version>1.8.0-beta2</slf4j.version>
 	
   </properties>
@@ -95,9 +95,10 @@
 	    <groupId>org.slf4j</groupId>
 	    <artifactId>slf4j-api</artifactId>
 	    <version>${slf4j.version}</version>
-	    <scope>test</scope>
+<!-- 	    <scope>test</scope> -->
 	</dependency>
 	<dependency>
+		<!-- bisogna utilizzare una delle ultime versioni disponibili altrimenti questa dipendenza non fa il binding con slf4j -->
 	    <groupId>ch.qos.logback</groupId>
 	    <artifactId>logback-classic</artifactId>
 	    <version>${logback.version}</version>
