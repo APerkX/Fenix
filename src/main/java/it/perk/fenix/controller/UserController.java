@@ -58,7 +58,7 @@ public class UserController {
 			UtenteDTO utente = utenteSRV.getByUsername(sb.toString());
 			return Preconditions.checkNotNull(utente);
 		} catch (Exception e) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Eccezione di prova");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
 	}
 	

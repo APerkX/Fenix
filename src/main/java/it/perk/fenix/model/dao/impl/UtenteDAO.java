@@ -4,6 +4,7 @@
 package it.perk.fenix.model.dao.impl;
 
 import javax.persistence.EntityExistsException;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -17,6 +18,8 @@ import it.perk.fenix.dto.RuoloDTO;
 import it.perk.fenix.dto.UfficiRuoliDTO;
 import it.perk.fenix.dto.UfficioDTO;
 import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.exception.FenixException;
+import it.perk.fenix.exception.ResourceNotFoundException;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.AbstractJpaDAO;
 import it.perk.fenix.model.dao.IUtenteDAO;
@@ -66,8 +69,6 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 			TypedQuery<Utente> query = em.createQuery(cq);
 			Utente u = query.getSingleResult();
 			
-//			PUNTO DOVE INSERIRE IL CONTROLLO SULL'UTENTE E LANCIARE ECCEZIONE
-			
 			output = new UtenteDTO(u);
 			
 			if (!u.getNodiRuoli().isEmpty()) {
@@ -83,8 +84,12 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 				
 			}
 			
+		} catch (NoResultException e) {
+			LOGGER.warn("L'utente richiesto non è censito dall'applicazione --> " + username, e);
+			throw new ResourceNotFoundException("L'utente richiesto non è censito dall'applicativo", e);
 		} catch (Exception e) {
 			LOGGER.error("Errore durante la ricerca dell'utente : " + username, e);
+			throw new FenixException("Errore durante la ricerca dell'utente : " + username, e);
 		}
 		return output;
 	}
