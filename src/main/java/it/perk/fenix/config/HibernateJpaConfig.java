@@ -24,8 +24,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.google.common.base.Preconditions;
 
-import it.perk.fenix.provider.PropertiesProvider;
-
 /**
  * @author Perk
  *

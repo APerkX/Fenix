@@ -66,6 +66,8 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 			TypedQuery<Utente> query = em.createQuery(cq);
 			Utente u = query.getSingleResult();
 			
+//			PUNTO DOVE INSERIRE IL CONTROLLO SULL'UTENTE E LANCIARE ECCEZIONE
+			
 			output = new UtenteDTO(u);
 			
 			if (!u.getNodiRuoli().isEmpty()) {

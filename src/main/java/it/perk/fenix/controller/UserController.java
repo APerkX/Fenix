@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.google.common.base.Preconditions;
 
@@ -45,8 +47,19 @@ public class UserController {
 
 	@GetMapping(path = "/user/{username}") 
 	public UtenteDTO findUserForLogin(@PathVariable("username") String username){
-		UtenteDTO utente = utenteSRV.getByUsername("biagio.mazzotta");
-		return Preconditions.checkNotNull(utente);
+		// il PathVariable non è in grado di gestire il '.' 
+		// cosi viene utilizzato il '-' per separare il nome-cognome 
+		try {
+			// una volta ricevuto viene normalizzato per essere utilizzato lato service
+			String[] userPart = username.split("-");
+			StringBuilder sb = new StringBuilder();
+			sb.append(userPart[0]).append(".").append(userPart[1]);
+			
+			UtenteDTO utente = utenteSRV.getByUsername(sb.toString());
+			return Preconditions.checkNotNull(utente);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Eccezione di prova");
+		}
 	}
 	
 	
