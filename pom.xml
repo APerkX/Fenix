@@ -22,7 +22,7 @@
 	
 	<!-- FileNet -->
 	<Jacpe.version>5.2.0.1</Jacpe.version>
-	<filenet-pe.version>5.2.1</filenet-pe.version>
+	<filenet-pe.version>5.2.1</filenet-pe.version><!-- 	<version>5.0.0.2</version> -->
 	<peResources.version>4.5.0.0</peResources.version>
 	<pe3pt.version>4.5.0.0</pe3pt.version>
 	
@@ -85,7 +85,6 @@
 	<dependency>
 		<groupId>filenet</groupId>
 		<artifactId>pe</artifactId>
-<!-- 	<version>5.0.0.2</version> -->
 		<version>${filenet-pe.version}</version>
 	</dependency>
 	<dependency>
