@@ -20,6 +20,12 @@
 	<hibernate.version>5.2.10.Final</hibernate.version>
 	<mysql-connector-java.version>8.0.11</mysql-connector-java.version>
 	
+	<!-- FileNet -->
+	<Jacpe.version>5.2.0.1</Jacpe.version>
+	<filenet-pe.version>5.2.1</filenet-pe.version><!-- 	<version>5.0.0.2</version> -->
+	<peResources.version>4.5.0.0</peResources.version>
+	<pe3pt.version>4.5.0.0</pe3pt.version>
+	
 	<!-- maven plugins -->
 	<maven-war-plugin.version>2.6</maven-war-plugin.version>
 
@@ -68,6 +74,28 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>${mysql-connector-java.version}</version>
 		<scope>runtime</scope>
+	</dependency>
+	
+	<!-- FileNet -->
+	<dependency>
+		<groupId>com.filenet</groupId>
+		<artifactId>Jacpe</artifactId>
+		<version>${Jacpe.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>filenet</groupId>
+		<artifactId>pe</artifactId>
+		<version>${filenet-pe.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.filenet</groupId>
+		<artifactId>peResources</artifactId>
+		<version>${peResources.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>com.filenet</groupId>
+		<artifactId>pe3pt</artifactId>
+		<version>${pe3pt.version}</version>
 	</dependency>
 	
 	
