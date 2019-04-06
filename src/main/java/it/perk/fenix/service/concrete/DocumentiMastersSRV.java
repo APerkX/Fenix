@@ -15,15 +15,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import filenet.vw.api.VWQueueQuery;
 import it.perk.fenix.constants.Constants.BooleanFlag;
+import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.dto.MasterDocumentRedDTO;
-import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.dto.UserForRequestDTO;
 import it.perk.fenix.enums.DocumentQueueEnum;
 import it.perk.fenix.enums.QueueGroupEnum;
 import it.perk.fenix.enums.SourceTypeEnum;
+import it.perk.fenix.helper.filenet.pe.FilenetPEHelper;
 import it.perk.fenix.helper.filenet.pe.dao.QueueFilenetDAO;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.IUtenteDAO;
 import it.perk.fenix.service.IDocumentiMastersSRV;
+import it.perk.fenix.service.IUtenteSRV;
 
 /**
  * Service che gestisce le richieste di Documenti.
@@ -48,18 +51,23 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 	@Autowired
 	private IUtenteDAO utenteDao;
 
+	@Autowired
+	private IUtenteSRV utenteSRV;
+
 	
 	@Override
-	public Collection<MasterDocumentRedDTO> getDocumentForMaster(DocumentQueueEnum queue, UtenteDTO utente) {
+	public Collection<MasterDocumentRedDTO> getDocumentForMaster(DocumentQueueEnum queue, UserForRequestDTO utente) {
 		Collection<MasterDocumentRedDTO> output = new ArrayList<>();
 		Set<String> documentTitleSet = new HashSet<>();
 		
 		try {
 			
+			FilenetCredentialsDTO fcDto = utenteSRV.getFilenetCredential(utente.getUfficioRuolo().getUfficio().getIdNodo()); 
+			
 			if (SourceTypeEnum.FILENET.equals(queue.getType())) {
 //				<-- Gestione Code Filenet -->
 				
-				VWQueueQuery workFlows = getQueueFilenet(queue, utente);
+				VWQueueQuery workFlows = getQueueFilenet(queue, utente, fcDto);
 				
 				/**
 				 * 
@@ -108,20 +116,23 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 
 
 	@Override
-	public VWQueueQuery getQueueFilenet(DocumentQueueEnum queue, UtenteDTO utente) {
+	public VWQueueQuery getQueueFilenet(DocumentQueueEnum queue, UserForRequestDTO utente, FilenetCredentialsDTO fcDto) {
 		List<Long> idsUtenteDestinatario = new ArrayList<>();
 		List<Long> idsTipoAssegnazione = new ArrayList<>();
+
+		// Init del PE helper che contiene le connessioni che verrà passato ai DaoFilenet
+		FilenetPEHelper fpeh = new FilenetPEHelper(null); 
 		
 		// Creazione instanza per interrogazione Filenet Pe
-		QueueFilenetDAO queueDao = new QueueFilenetDAO(null);
+		QueueFilenetDAO queueDao = new QueueFilenetDAO();
 		
 		//Informazioni Comuni a tutte le code
 		String queueName = queue.getName();
 		String indexName = queue.getIndexName();
 		Boolean registroRiservato = false;
-		Long idNodoDestinatario = null; //utente.getIdUfficio();
+		Long idNodoDestinatario = utente.getUfficioRuolo().getUfficio().getIdNodo();
 		idsUtenteDestinatario.add(utente.getIdUtente());
-		String idClient = null; //utente.getFcDTO().getIdClientAoo();
+		String idClient = fcDto.getIdClientAoo();
 		Integer flagRenderizzato = null;
 		
 		//Prendo informazioni Specifiche nel caso la coda lo richieda
@@ -148,14 +159,15 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 		
 		
 		//Eseguo query generica per il recupero dei workflow delle code FileNet
-		return queueDao.getWorkFlowsForQueueFilent(queueName, 				//Nome Coda
-												   indexName, 				//Index Name
-												   idNodoDestinatario, 		//ID Nodo Destinatario
-												   idsUtenteDestinatario, 	//ID Utente/i destinatari/io
-												   idClient, 				//ID ClientAoo
-												   idsTipoAssegnazione, 	//IdTipoAssegnazione 
-												   flagRenderizzato, 		//Flag Renderizzato
-												   registroRiservato);		//Registro Riservato
+		return queueDao.getWorkFlowsForQueueFilent(queueName, 				// Nome Coda
+												   indexName, 				// Index Name
+												   idNodoDestinatario, 		// ID Nodo Destinatario
+												   idsUtenteDestinatario, 	// ID Utente/i destinatari/io
+												   idClient, 				// ID ClientAoo
+												   idsTipoAssegnazione, 	// IdTipoAssegnazione 
+												   flagRenderizzato, 		// Flag Renderizzato
+												   registroRiservato,		// Registro Riservato
+												   fpeh );					// Helper per connessioni	
 	}
 
 }
