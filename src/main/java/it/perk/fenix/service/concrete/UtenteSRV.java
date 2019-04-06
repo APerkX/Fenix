@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.dto.UtenteDTO;
 import it.perk.fenix.exception.FenixException;
 import it.perk.fenix.exception.ResourceNotFoundException;
@@ -50,6 +51,12 @@ public class UtenteSRV implements IUtenteSRV {
 		}
 		
 		return utente;
+	}
+
+	@Override
+	public FilenetCredentialsDTO getFilenetCredential(Long idUfficio) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
