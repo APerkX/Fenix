@@ -18,11 +18,14 @@ import it.perk.fenix.constants.Constants.BooleanFlag;
 import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.dto.MasterDocumentRedDTO;
 import it.perk.fenix.dto.UserForRequestDTO;
+import it.perk.fenix.dto.WorkFlowDTO;
 import it.perk.fenix.enums.DocumentQueueEnum;
 import it.perk.fenix.enums.QueueGroupEnum;
 import it.perk.fenix.enums.SourceTypeEnum;
+import it.perk.fenix.enums.TrasformerPEEnum;
 import it.perk.fenix.helper.filenet.pe.FilenetPEHelper;
 import it.perk.fenix.helper.filenet.pe.dao.QueueFilenetDAO;
+import it.perk.fenix.helper.filenet.pe.trasform.TrasformPE;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.IUtenteDAO;
 import it.perk.fenix.service.IDocumentiMastersSRV;
@@ -68,6 +71,8 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 //				<-- Gestione Code Filenet -->
 				
 				VWQueueQuery workFlows = getQueueFilenet(queue, utente, fcDto);
+				
+				Collection<WorkFlowDTO> workFlowDTO = TrasformPE.transform(workFlows, TrasformerPEEnum.FROM_WF_TO_DOCUMENTO);	
 				
 				/**
 				 * 

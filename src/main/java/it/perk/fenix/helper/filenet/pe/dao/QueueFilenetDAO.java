@@ -18,6 +18,8 @@ import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.provider.PropertiesProvider;
 
 /**
+ * Data Access Object che gestisce le Queue Filenet.
+ * 
  * @author Perk
  *
  */
@@ -27,6 +29,7 @@ public class QueueFilenetDAO implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5702263495648759301L;
+	
 	/**
 	 * Logger.
 	 */
