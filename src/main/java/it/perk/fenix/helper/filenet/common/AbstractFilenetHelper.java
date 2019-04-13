@@ -5,8 +5,13 @@ package it.perk.fenix.helper.filenet.common;
 
 import javax.security.auth.Subject;
 
+import com.filenet.api.constants.PropertyNames;
 import com.filenet.api.core.Connection;
+import com.filenet.api.core.Domain;
 import com.filenet.api.core.Factory;
+import com.filenet.api.core.ObjectStore;
+import com.filenet.api.property.FilterElement;
+import com.filenet.api.property.PropertyFilter;
 import com.filenet.api.util.UserContext;
 
 import filenet.vw.api.VWSession;
@@ -63,6 +68,23 @@ public abstract class AbstractFilenetHelper {
 			LOGGER.error(e.getMessage());
 			throw new FilenetException(e);
 		}
+	}
+	
+	/**
+	 * Metodo per il recupero dell'objectstore.
+	 * 
+	 * @param objectStore	nome object store
+	 * @param con			connessione
+	 * @return				object store
+	 */
+	protected final ObjectStore getObjectStore(final String objectStore, final Connection con) {
+		PropertyFilter pf = new PropertyFilter();
+		pf.addIncludeProperty(new FilterElement(0, null, Boolean.TRUE, PropertyNames.NAME, null));
+		pf.addIncludeProperty(new FilterElement(0, null, Boolean.TRUE, PropertyNames.DOMAIN, null));
+		Domain dom = Factory.Domain.fetchInstance(con, null, pf);
+		ObjectStore os = Factory.ObjectStore.getInstance(dom, objectStore);
+		os.fetchProperties(pf);
+		return os;
 	}
 	
 	

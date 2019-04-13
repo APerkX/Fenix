@@ -8,7 +8,7 @@ import java.util.Date;
 import filenet.vw.api.VWException;
 import filenet.vw.api.VWWorkObject;
 import it.perk.fenix.constants.Constants;
-import it.perk.fenix.dto.WorkFlowDTO;
+import it.perk.fenix.dto.PEDocumentoDTO;
 import it.perk.fenix.enums.ColoreNotaEnum;
 import it.perk.fenix.enums.DocumentQueueEnum;
 import it.perk.fenix.enums.PropertiesNameEnum;
@@ -24,7 +24,7 @@ import it.perk.fenix.utils.DateUtils;
  * @author Perk
  *
  */
-public class FromWFToDocumentoTrasformer extends TrasformerPE<WorkFlowDTO> {
+public class FromWFToDocumentoTrasformer extends TrasformerPE<PEDocumentoDTO> {
 
 	/**
 	 * 
@@ -51,7 +51,7 @@ public class FromWFToDocumentoTrasformer extends TrasformerPE<WorkFlowDTO> {
 	 * @return the PE documento DTO
 	 */
 	@Override
-	public WorkFlowDTO trasform(VWWorkObject object) {
+	public PEDocumentoDTO trasform(VWWorkObject object) {
 		
 		String[] responses = ResponsesFilenetDAO.getResponses(object);
 		String stepName = object.fetchStepElement().getStepName();
@@ -114,7 +114,7 @@ public class FromWFToDocumentoTrasformer extends TrasformerPE<WorkFlowDTO> {
 		Boolean firmaCopiaConforme = (Boolean) getMetadato(object, pp.getParameterByKey(PropertiesNameEnum.FIRMA_COPIA_CONFORME_METAKEY));
 		String nota = (String) getMetadato(object, "F_Comment");
 
-		return new WorkFlowDTO(idDocumento, tolf, wobNumber, DocumentQueueEnum.get(queueName), idUtenteDestinatario, 
+		return new PEDocumentoDTO(idDocumento, tolf, wobNumber, DocumentQueueEnum.get(queueName), idUtenteDestinatario, 
 				idNodoDestinatario, bFirmaFig, motivazioneAssegnazione, responses, idFascicolo, codaCorrente, tipoAssegnazioneId, 
 				flagIterManuale, subject, elencoLibroFirma, count, dataCreazioneWF, flagRenderizzatoBool, firmaCopiaConforme, urgente, stepName, ColoreNotaEnum.getNotaDTO(nota));
 

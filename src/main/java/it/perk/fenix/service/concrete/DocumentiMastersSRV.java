@@ -5,6 +5,7 @@ package it.perk.fenix.service.concrete;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,21 +14,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.filenet.api.collection.DocumentSet;
+
 import filenet.vw.api.VWQueueQuery;
 import it.perk.fenix.constants.Constants.BooleanFlag;
 import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.dto.MasterDocumentRedDTO;
+import it.perk.fenix.dto.PEDocumentoDTO;
+import it.perk.fenix.dto.TandemDTO;
 import it.perk.fenix.dto.UserForRequestDTO;
-import it.perk.fenix.dto.WorkFlowDTO;
 import it.perk.fenix.enums.DocumentQueueEnum;
+import it.perk.fenix.enums.PropertiesNameEnum;
 import it.perk.fenix.enums.QueueGroupEnum;
 import it.perk.fenix.enums.SourceTypeEnum;
 import it.perk.fenix.enums.TrasformerPEEnum;
+import it.perk.fenix.helper.filenet.ce.FilenetCEHelper;
+import it.perk.fenix.helper.filenet.ce.dao.impl.MastersFilenetDAO;
 import it.perk.fenix.helper.filenet.pe.FilenetPEHelper;
 import it.perk.fenix.helper.filenet.pe.dao.QueueFilenetDAO;
 import it.perk.fenix.helper.filenet.pe.trasform.TrasformPE;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.dao.IUtenteDAO;
+import it.perk.fenix.provider.PropertiesProvider;
 import it.perk.fenix.service.IDocumentiMastersSRV;
 import it.perk.fenix.service.IUtenteSRV;
 
@@ -62,6 +70,7 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 	public Collection<MasterDocumentRedDTO> getDocumentForMaster(DocumentQueueEnum queue, UserForRequestDTO utente) {
 		Collection<MasterDocumentRedDTO> output = new ArrayList<>();
 		Set<String> documentTitleSet = new HashSet<>();
+		HashMap<String, Collection<TandemDTO>> tandemRelation = new HashMap<>();
 		
 		try {
 			
@@ -72,20 +81,42 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 				
 				VWQueueQuery workFlows = getQueueFilenet(queue, utente, fcDto);
 				
-				Collection<WorkFlowDTO> workFlowDTO = TrasformPE.transform(workFlows, TrasformerPEEnum.FROM_WF_TO_DOCUMENTO);	
+				Collection<PEDocumentoDTO> workFlowList = TrasformPE.transform(workFlows, TrasformerPEEnum.FROM_WF_TO_DOCUMENTO);
 				
-				/**
-				 * 
-				 * Recupero dei documentTitle dal PE 
-				 * e delle informazioni relative ai WF. 
-				 * 
-				 * 
-				 */
+				// Viene ciclato il risultato della query sul PE per poter creare una struttura che rispecchi la relazione tra 
+				// un Documento e 'N' WorkFlow
+				for (PEDocumentoDTO wf : workFlowList) {
+					
+					Collection<TandemDTO> tandemList = new ArrayList<>();
+					wf.setQueue(queue);
+					
+					// Si prende il documentTitle all'interno del WF e
+					// Viene Aggiunto al set di documentTitle che verrà proiettato sul CE 
+					if (documentTitleSet.add(wf.getIdDocumento())) {
+						// Se non è presente nel set viene creata la prima relazione tra un Document e Workflow
+						TandemDTO t = new TandemDTO(wf);
+						tandemList.add(t);
+						tandemRelation.put(wf.getIdDocumento(), tandemList);
+					} else {
+						// Altrimenti se già presente viene recuperata quella relazione e aggiunto un Workflow
+						tandemRelation.get(wf.getIdDocumento()).add(new TandemDTO(wf));
+					}
+				} 
 				
 //				<-- Fine Gestione Code Filenet -->
 				
 			} else {
 //				<-- Gestione Code Applicative -->
+				
+				Long idUtente = utente.getIdUtente();
+				Long idUfficio = utente.getUfficioRuolo().getUfficio().getIdNodo();
+				
+				// Se la coda richiesta fa parte del Gruppo Ufficio si imposta l'idUtente a 0
+				if (QueueGroupEnum.UFFICIO.equals(queue.getGroup())) {
+					idUtente = 0L;
+				}
+				
+				documentTitleSet = null;
 				
 				/**
 				 * 
@@ -97,9 +128,11 @@ public class DocumentiMastersSRV implements IDocumentiMastersSRV{
 //				<-- Fine Gestione Code Applicative -->
 			}
 			
-//			<-- Reupero dati da CE utilizzando i document title provenienti da PE o DB -->
+//			<-- Proiezione sul CE utilizzando i document title provenienti da PE o DB e recupero dei Document -->
 			if (documentTitleSet != null && !documentTitleSet.isEmpty()) {
-				
+				FilenetCEHelper fceh = new FilenetCEHelper(fcDto);
+				MastersFilenetDAO masterDao = new MastersFilenetDAO();
+				DocumentSet documentSetRaw = masterDao.getDocumentsForMasters(PropertiesProvider.getIstance().getParameterByKey(PropertiesNameEnum.DOCUMENTO_CLASSNAME_FN_METAKEY), documentTitleSet, fceh);
 				/**
 				 * 
 				 * Recupero dei Documenti utilizzando i document title provenienti da PE o DB

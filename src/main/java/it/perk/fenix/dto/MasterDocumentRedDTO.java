@@ -403,7 +403,7 @@ public class MasterDocumentRedDTO implements Serializable{
 		
 	}
 	
-	public final void fill(WorkFlowDTO wf) {
+	public final void fill(PEDocumentoDTO wf) {
 		this.setUrgente(wf.getUrgente());
 		this.setOperazione(wf.getOperazione());
 		this.setWobNumber(wf.getWobNumber());
