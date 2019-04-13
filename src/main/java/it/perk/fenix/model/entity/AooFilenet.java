@@ -5,11 +5,13 @@ package it.perk.fenix.model.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,14 +30,24 @@ public class AooFilenet implements Serializable {
 	 */
 	private static final long serialVersionUID = -3309367734439032895L;
 	
-	/**
-	 * Pk AOO Filenet.
-	 */	
 	// TODO: verificare che questa sia effettivamente la Primarykey
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "PK_AOO_FILENET")
+	@Column(name = "IDAOOFILNET")
 	private Long idAooFilenet;
+
+	/**
+	 * Aoo.
+	 */	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_AOO", referencedColumnName = "IDAOO")
+	private Aoo aoo;
+	
+	/**
+	 * Pk AOO Filenet.
+	 */	
+	@Column(name = "PK_AOO_FILENET")
+	private Long pkAooFilenet;
 
 	/**
 	 * Connection point.
@@ -80,11 +92,6 @@ public class AooFilenet implements Serializable {
 	@Column(name = "USERNAME")
 	private String username;
 
-	/**
-	 * Aoo.
-	 */	
-	@OneToOne(mappedBy = "aooFilenet")
-	private Aoo aoo;
 
 	public AooFilenet() {
 		super();
@@ -102,6 +109,20 @@ public class AooFilenet implements Serializable {
 	 */
 	public void setIdAooFilenet(Long idAooFilenet) {
 		this.idAooFilenet = idAooFilenet;
+	}
+
+	/**
+	 * @return the pkAooFilenet
+	 */
+	public Long getPkAooFilenet() {
+		return pkAooFilenet;
+	}
+
+	/**
+	 * @param pkAooFilenet the pkAooFilenet to set
+	 */
+	public void setPkAooFilenet(Long pkAooFilenet) {
+		this.pkAooFilenet = pkAooFilenet;
 	}
 
 	/**

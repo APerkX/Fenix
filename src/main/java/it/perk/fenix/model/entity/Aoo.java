@@ -44,8 +44,7 @@ public class Aoo implements Serializable {
 	/**
 	 * Informazioni filenet.
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "IDAOOFILENET", referencedColumnName = "PK_AOO_FILENET")
+	@OneToOne(mappedBy = "aoo")
 	private AooFilenet aooFilenet;
 
 	/**
