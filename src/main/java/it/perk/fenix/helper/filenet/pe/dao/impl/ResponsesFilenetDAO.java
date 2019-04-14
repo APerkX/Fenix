@@ -1,7 +1,7 @@
 /**
  * 
  */
-package it.perk.fenix.helper.filenet.pe.dao;
+package it.perk.fenix.helper.filenet.pe.dao.impl;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import it.perk.fenix.exception.FilenetException;
 import it.perk.fenix.logger.FenixLogger;
 
 /**
- * Data Access Object che gestisce le Responsesdei WorkFlow Filenet.
+ * Data Access Object che gestisce le Responses dei WorkFlow Filenet.
  * 
  * @author Perk
  *

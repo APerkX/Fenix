@@ -36,7 +36,63 @@ public class Constants {
 		protected BooleanFlag() {
 		}
 	}
+	
+	/**
+	 * The Class TipoDestinatario.
+	 *
+	 * @author Perk
+	 * 
+	 * 	Tipologia destinatario (interno/esterno).
+	 */
+	public static final class TipoDestinatario {
+		
+		/**
+		 * Destinatario interno.
+		 */
+		public static final String INTERNO = "I";
 
+		/**
+		 * Destinatario esterno.
+		 */
+		public static final String ESTERNO = "E";
+
+		/**
+		 * Costruttore.
+		 */
+		protected TipoDestinatario() {
+		}
+	}
+	
+	/**
+	 * The Class TipoSpedizione.
+	 *
+	 * @author CPIERASC
+	 * 
+	 * 	Tipo spedizione.
+	 */
+	public static final class TipoSpedizione {
+		
+		/**
+		 * Identificativo mezzo non specificato.
+		 */
+		public static final Integer MEZZO_NON_SPECIFICATO = 0;
+
+		/**
+		 * Identificativo mezzo cartaceo.
+		 */
+		public static final Integer MEZZO_CARTACEO = 1;
+
+		/**
+		 * Identificativo mezzo elettronico.
+		 */
+		public static final Integer MEZZO_ELETTRONICO = 2;
+		
+		/**
+		 * Costruttore.
+		 */
+		protected TipoSpedizione() {
+		}
+	}
 	
 	/**
 	 * 	Proprietà del PE.

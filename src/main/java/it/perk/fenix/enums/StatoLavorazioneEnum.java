@@ -3,11 +3,13 @@
  */
 package it.perk.fenix.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author Perk
  *
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum StatoLavorazioneEnum {
 	
 	LAVORATE(1L, "LAVORATE"),

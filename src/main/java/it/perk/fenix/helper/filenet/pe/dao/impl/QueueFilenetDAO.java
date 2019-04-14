@@ -1,19 +1,17 @@
 /**
  * 
  */
-package it.perk.fenix.helper.filenet.pe.dao;
+package it.perk.fenix.helper.filenet.pe.dao.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import filenet.vw.api.VWQueueQuery;
-import it.perk.fenix.constants.Constants;
-import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.enums.PropertiesNameEnum;
 import it.perk.fenix.helper.filenet.pe.FilenetPEHelper;
 import it.perk.fenix.helper.filenet.pe.FilenetPEQueryBuilder;
 import it.perk.fenix.helper.filenet.pe.FilenetPEQueryBuilder.Proposition;
+import it.perk.fenix.helper.filenet.pe.dao.IQueueFilenetDAO;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.provider.PropertiesProvider;
 
@@ -23,7 +21,7 @@ import it.perk.fenix.provider.PropertiesProvider;
  * @author Perk
  *
  */
-public class QueueFilenetDAO implements Serializable {
+public class QueueFilenetDAO implements IQueueFilenetDAO {
 
 	/**
 	 * 

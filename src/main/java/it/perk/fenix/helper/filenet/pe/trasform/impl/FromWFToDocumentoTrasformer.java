@@ -14,7 +14,7 @@ import it.perk.fenix.enums.DocumentQueueEnum;
 import it.perk.fenix.enums.PropertiesNameEnum;
 import it.perk.fenix.enums.TipoOperazioneLibroFirmaEnum;
 import it.perk.fenix.enums.TrasformerPEEnum;
-import it.perk.fenix.helper.filenet.pe.dao.ResponsesFilenetDAO;
+import it.perk.fenix.helper.filenet.pe.dao.impl.ResponsesFilenetDAO;
 import it.perk.fenix.helper.filenet.pe.trasform.TrasformPE;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.provider.PropertiesProvider;

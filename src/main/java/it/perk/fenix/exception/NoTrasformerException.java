@@ -3,6 +3,7 @@
  */
 package it.perk.fenix.exception;
 
+import it.perk.fenix.enums.TrasformerCEEnum;
 import it.perk.fenix.enums.TrasformerPEEnum;
 
 /**
@@ -32,8 +33,8 @@ public class NoTrasformerException extends RuntimeException {
 	 * 
 	 * @param enumKey enum CE
 	 */
-//	public NoTrasformerException(final TrasformerCEEnum enumKey) {
-//		super("Trasformer non trovato per la chiave: " + enumKey);
-//	}
+	public NoTrasformerException(final TrasformerCEEnum enumKey) {
+		super("Trasformer non trovato per la chiave: " + enumKey);
+	}
 
 }
