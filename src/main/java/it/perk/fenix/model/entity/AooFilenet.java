@@ -30,11 +30,10 @@ public class AooFilenet implements Serializable {
 	 */
 	private static final long serialVersionUID = -3309367734439032895L;
 	
-	// TODO: verificare che questa sia effettivamente la Primarykey
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "IDAOOFILNET")
-	private Long idAooFilenet;
+	@Column(name = "PK_AOO_FILENET")
+	private Long pkAooFilenet;
 
 	/**
 	 * Aoo.
@@ -46,8 +45,6 @@ public class AooFilenet implements Serializable {
 	/**
 	 * Pk AOO Filenet.
 	 */	
-	@Column(name = "PK_AOO_FILENET")
-	private Long pkAooFilenet;
 
 	/**
 	 * Connection point.
@@ -97,20 +94,6 @@ public class AooFilenet implements Serializable {
 		super();
 	}
 	
-	/**
-	 * @return the idAooFilenet
-	 */
-	public Long getIdAooFilenet() {
-		return idAooFilenet;
-	}
-
-	/**
-	 * @param idAooFilenet the idAooFilenet to set
-	 */
-	public void setIdAooFilenet(Long idAooFilenet) {
-		this.idAooFilenet = idAooFilenet;
-	}
-
 	/**
 	 * @return the pkAooFilenet
 	 */
