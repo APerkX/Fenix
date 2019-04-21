@@ -15,7 +15,7 @@ import it.perk.fenix.provider.PropertiesProvider;
  * @author Perk
  *
  */
-public abstract class FilenetPEHelper extends AbstractFilenetHelper {
+public class FilenetPEHelper extends AbstractFilenetHelper {
 	
 	/**
 	 * Logger.

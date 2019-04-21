@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import it.perk.fenix.dto.MasterDocumentRedDTO;
-import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.dto.UserForRequestDTO;
 import it.perk.fenix.enums.DocumentQueueEnum;
 
 /**
@@ -23,6 +23,6 @@ public interface IDocumentiMastersFacadeSRV extends Serializable {
 	 * @param utente 	- Utente richiedente
 	 * @return Collection di DTO utilizzati per valorizzare il DTH
 	 */
-	Collection<MasterDocumentRedDTO> getDocumentForMaster(DocumentQueueEnum queue, UtenteDTO utente);
+	Collection<MasterDocumentRedDTO> getDocumentForMaster(DocumentQueueEnum queue, UserForRequestDTO utente);
 	
 }

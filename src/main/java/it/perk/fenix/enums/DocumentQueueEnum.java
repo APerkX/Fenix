@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 import it.perk.fenix.constants.Constants;
 
 
@@ -17,6 +20,7 @@ import it.perk.fenix.constants.Constants;
  * 
  *
  */
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum DocumentQueueEnum {
 	
 	/**
@@ -224,6 +228,23 @@ public enum DocumentQueueEnum {
 		DocumentQueueEnum output = DocumentQueueEnum.NON_CENSITO;
 		for (DocumentQueueEnum q:DocumentQueueEnum.values()) {
 			if (q.getName().equals(value)) {
+				output = q;
+				break;
+			}
+		}
+		return output;
+	}
+
+	/**
+	 * Metodo per il recupero di un'enum dato il valore caratteristico.
+	 * 
+	 * @param value	valore
+	 * @return		enum
+	 */
+	public static DocumentQueueEnum get(final Integer value) {
+		DocumentQueueEnum output = DocumentQueueEnum.NON_CENSITO;
+		for (DocumentQueueEnum q:DocumentQueueEnum.values()) {
+			if (q.getId().equals(value)) {
 				output = q;
 				break;
 			}

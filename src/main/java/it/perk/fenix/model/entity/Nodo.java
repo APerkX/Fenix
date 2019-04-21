@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -71,7 +73,9 @@ public class Nodo implements Serializable {
 	/**
 	 * Aoo.
 	 */
-//	private Aoo aoo;
+	@ManyToOne
+	@JoinColumn(name = "IDAOO", nullable = false)
+	private Aoo aoo;
 	
 	// andrebbe prevista una relazione @OneToOne con l'entità utente.
 	@Column(name = "IDUTENTEDIRIGENTE")
@@ -194,6 +198,20 @@ public class Nodo implements Serializable {
 	 */
 	public void setUtentiRuoli(Collection<NodoUtenteRuolo> utentiRuoli) {
 		this.utentiRuoli = utentiRuoli;
+	}
+
+	/**
+	 * @return the aoo
+	 */
+	public Aoo getAoo() {
+		return aoo;
+	}
+
+	/**
+	 * @param aoo the aoo to set
+	 */
+	public void setAoo(Aoo aoo) {
+		this.aoo = aoo;
 	}
 	
 	

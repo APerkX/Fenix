@@ -1,36 +1,42 @@
 /**
  * 
  */
-package it.perk.fenix.helper.filenet.pe.dao;
+package it.perk.fenix.helper.filenet.pe.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import filenet.vw.api.VWQueueQuery;
-import it.perk.fenix.constants.Constants;
-import it.perk.fenix.dto.FilenetCredentialsDTO;
 import it.perk.fenix.enums.PropertiesNameEnum;
 import it.perk.fenix.helper.filenet.pe.FilenetPEHelper;
 import it.perk.fenix.helper.filenet.pe.FilenetPEQueryBuilder;
 import it.perk.fenix.helper.filenet.pe.FilenetPEQueryBuilder.Proposition;
+import it.perk.fenix.helper.filenet.pe.dao.IQueueFilenetDAO;
 import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.provider.PropertiesProvider;
 
 /**
+ * Data Access Object che gestisce le Queue Filenet.
+ * 
  * @author Perk
  *
  */
-public class QueueFilenetDAO extends FilenetPEHelper {
+public class QueueFilenetDAO implements IQueueFilenetDAO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5702263495648759301L;
+	
 	/**
 	 * Logger.
 	 */
 	private static final FenixLogger LOGGER = FenixLogger.getLogger(QueueFilenetDAO.class.getName());
 	
 	
-	public QueueFilenetDAO(FilenetCredentialsDTO dto) {
-		super(dto);
-	}
+//	public QueueFilenetDAO(FilenetCredentialsDTO dto) {
+//		super(dto);
+//	}
 
 	/**
 	 * Metodo per effettuare una query sul PE e che restituisce i workflow di una determinata Coda Filenet.
@@ -47,9 +53,9 @@ public class QueueFilenetDAO extends FilenetPEHelper {
 	 * @return VWQueueQuery
 	 */
 	public VWQueueQuery getWorkFlowsForQueueFilent(final String nomeQueue, final String indexName, final Long idNodoDestinatario, final List<Long> idUtenteDestinatari,
-													final String idClientAoo, final List<Long> idsTipoAssegnazione, final Integer flagRenderizzato, final Boolean registroRiservato) {
+													final String idClientAoo, final List<Long> idsTipoAssegnazione, final Integer flagRenderizzato, final Boolean registroRiservato, final FilenetPEHelper fpeh) {
 		
-		FilenetPEQueryBuilder fqb = new FilenetPEQueryBuilder(getSession(), nomeQueue);
+		FilenetPEQueryBuilder fqb = new FilenetPEQueryBuilder(fpeh.getSession(), nomeQueue);
 		
 		// IdNodoDestinatario
 		fqb.and(PropertiesProvider.getIstance().getParameterByKey(PropertiesNameEnum.ID_NODO_DESTINATARIO_WF_METAKEY), idNodoDestinatario.intValue());

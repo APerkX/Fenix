@@ -9,18 +9,15 @@ import it.perk.fenix.enums.DocumentQueueEnum;
 import it.perk.fenix.enums.TipoOperazioneLibroFirmaEnum;
 
 /**
- * DTO per le informazioni su un documento contenute nel PE.
- * 
  * @author Perk
  *
  */
-public class PEDocumentoDTO implements Serializable {
-
+public class PEDocumentoDTO implements Serializable{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2531406312186266919L;
+	private static final long serialVersionUID = 3733018307054356048L;
 
 	/**
 	 * Coda corrente.
@@ -158,34 +155,14 @@ public class PEDocumentoDTO implements Serializable {
 	private String stepName;
 	
 	/**
-	 * 
+	 * Informazioni Nota
 	 */
 	private NotaDTO notaDTO;
 	
-	/**
-	 * Costruttore.
-	 * 
-	 * @param inIdDocumento					identificativo documento
-	 * @param inOperazione					operazione
-	 * @param inWobNumber					wob number
-	 * @param inQueue						coda
-	 * @param inIdUtenteDestinatario		identificativo utente destinatario
-	 * @param inIdNodoDestinatario			identificativo nodo destinatario
-	 * @param inFlagFirmaDig				flag firma digitale
-	 * @param inMotivazioneAssegnazione		motivazione assegnazione
-	 * @param inResponses					insieme di response associate
-	 * @param inIdFascicolo					identigicativo fascicolo
-	 * @param inCodaCorrente				coda corrente
-	 * @param inTipoAssegnazioneId			identificativo tipo assegnazione
-	 * @param inFlagIterManuale				flag iter manuale
-	 * @param inSubject						subject
-	 * @param inElencoLibroFirma			elenco libro firma
-	 * @param inCount						contatore
-	 * @param inDataCreazioneWF				data creazione work flow
-	 * @param inFlagRenderizzato			Flag renderizzazione work flow
-	 * @param inFirmaCopiaConforme			flag copia conforme
-	 * @param inUrgente						flag urgente
-	 */
+	public PEDocumentoDTO() {
+		
+	}
+	
 	public PEDocumentoDTO(final String inIdDocumento, final TipoOperazioneLibroFirmaEnum inOperazione, final String inWobNumber, 
 			final DocumentQueueEnum inQueue, final Integer inIdUtenteDestinatario, final Integer inIdNodoDestinatario, final Boolean inFlagFirmaDig, 
 			final String inMotivazioneAssegnazione, final String[] inResponses, final Integer inIdFascicolo, final String inCodaCorrente, 
@@ -227,7 +204,7 @@ public class PEDocumentoDTO implements Serializable {
 		stepName = inStepName;
 		notaDTO = inNotaDTO;
 
-		Boolean bIsInSignQueue = (inResponses != null && queue != null && DocumentQueueEnum.isInSignQueue(queue.getName()));
+//		Boolean bIsInSignQueue = (inResponses != null && queue != null && DocumentQueueEnum.isInSignQueue(queue.getName()));
 //		if (inResponses != null) {
 //			for (String response:inResponses) {
 //				if (bIsInSignQueue) {
@@ -252,236 +229,342 @@ public class PEDocumentoDTO implements Serializable {
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	urgenti
+	 * @return the codaCorrente
 	 */
-	public Boolean getUrgente() {
-		return urgente;
-	}
-	
-	/**
-	 * Getter.
-	 * 
-	 * @return	flag firma copia conforme
-	 */
-	public final Boolean getFirmaCopiaConforme() {
-		return firmaCopiaConforme;
-	}
-
-	/**
-	 * Getter flag renderizzato.
-	 * 
-	 * @return	Flag renderizzato.
-	 */
-	public final Boolean getFlagRenderizzato() {
-		if (flagRenderizzato == null) {
-			return Boolean.FALSE;
-		}
-		return flagRenderizzato;
-	}
-
-	/**
-	 * Getter.
-	 * 
-	 * @return	coda corrente
-	 */
-	public final String getCodaCorrente() {
+	public String getCodaCorrente() {
 		return codaCorrente;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	contatore
+	 * @param codaCorrente the codaCorrente to set
 	 */
-	public final int getCount() {
+	public void setCodaCorrente(String codaCorrente) {
+		this.codaCorrente = codaCorrente;
+	}
+
+	/**
+	 * @return the count
+	 */
+	public int getCount() {
 		return count;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	data creazione workflow
+	 * @param count the count to set
 	 */
-	public final String getDataCreazioneWF() {
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	/**
+	 * @return the dataCreazioneWF
+	 */
+	public String getDataCreazioneWF() {
 		return dataCreazioneWF;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	elenco libro firma
+	 * @param dataCreazioneWF the dataCreazioneWF to set
 	 */
-	public final String[] getElencoLibroFirma() {
+	public void setDataCreazioneWF(String dataCreazioneWF) {
+		this.dataCreazioneWF = dataCreazioneWF;
+	}
+
+	/**
+	 * @return the elencoLibroFirma
+	 */
+	public String[] getElencoLibroFirma() {
 		return elencoLibroFirma;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable firma
+	 * @param elencoLibroFirma the elencoLibroFirma to set
 	 */
-	public final Boolean getFlagEnableFirma() {
+	public void setElencoLibroFirma(String[] elencoLibroFirma) {
+		this.elencoLibroFirma = elencoLibroFirma;
+	}
+
+	/**
+	 * @return the flagEnableFirma
+	 */
+	public Boolean getFlagEnableFirma() {
 		return flagEnableFirma;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable firma autografa
+	 * @param flagEnableFirma the flagEnableFirma to set
 	 */
-	public final Boolean getFlagEnableFirmaAutografa() {
+	public void setFlagEnableFirma(Boolean flagEnableFirma) {
+		this.flagEnableFirma = flagEnableFirma;
+	}
+
+	/**
+	 * @return the firmaCopiaConforme
+	 */
+	public Boolean getFirmaCopiaConforme() {
+		return firmaCopiaConforme;
+	}
+
+	/**
+	 * @param firmaCopiaConforme the firmaCopiaConforme to set
+	 */
+	public void setFirmaCopiaConforme(Boolean firmaCopiaConforme) {
+		this.firmaCopiaConforme = firmaCopiaConforme;
+	}
+
+	/**
+	 * @return the flagEnableFirmaAutografa
+	 */
+	public Boolean getFlagEnableFirmaAutografa() {
 		return flagEnableFirmaAutografa;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable rifiuta
+	 * @param flagEnableFirmaAutografa the flagEnableFirmaAutografa to set
 	 */
-	public final Boolean getFlagEnableRifiuta() {
+	public void setFlagEnableFirmaAutografa(Boolean flagEnableFirmaAutografa) {
+		this.flagEnableFirmaAutografa = flagEnableFirmaAutografa;
+	}
+
+	/**
+	 * @return the flagEnableRifiuta
+	 */
+	public Boolean getFlagEnableRifiuta() {
 		return flagEnableRifiuta;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable sigla
+	 * @param flagEnableRifiuta the flagEnableRifiuta to set
 	 */
-	public final Boolean getFlagEnableSigla() {
+	public void setFlagEnableRifiuta(Boolean flagEnableRifiuta) {
+		this.flagEnableRifiuta = flagEnableRifiuta;
+	}
+
+	/**
+	 * @return the flagEnableSigla
+	 */
+	public Boolean getFlagEnableSigla() {
 		return flagEnableSigla;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable vista
+	 * @param flagEnableSigla the flagEnableSigla to set
 	 */
-	public final Boolean getFlagEnableVista() {
+	public void setFlagEnableSigla(Boolean flagEnableSigla) {
+		this.flagEnableSigla = flagEnableSigla;
+	}
+
+	/**
+	 * @return the flagEnableVista
+	 */
+	public Boolean getFlagEnableVista() {
 		return flagEnableVista;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag enable firma digitale
+	 * @param flagEnableVista the flagEnableVista to set
 	 */
-	public final Boolean getFlagFirmaDig() {
+	public void setFlagEnableVista(Boolean flagEnableVista) {
+		this.flagEnableVista = flagEnableVista;
+	}
+
+	/**
+	 * @return the flagFirmaDig
+	 */
+	public Boolean getFlagFirmaDig() {
 		return flagFirmaDig;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	flag iter manuale
+	 * @param flagFirmaDig the flagFirmaDig to set
 	 */
-	public final Integer getFlagIterManuale() {
+	public void setFlagFirmaDig(Boolean flagFirmaDig) {
+		this.flagFirmaDig = flagFirmaDig;
+	}
+
+	/**
+	 * @return the flagIterManuale
+	 */
+	public Integer getFlagIterManuale() {
 		return flagIterManuale;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	identificativo documento
+	 * @param flagIterManuale the flagIterManuale to set
 	 */
-	public final String getIdDocumento() {
+	public void setFlagIterManuale(Integer flagIterManuale) {
+		this.flagIterManuale = flagIterManuale;
+	}
+
+	/**
+	 * @return the idDocumento
+	 */
+	public String getIdDocumento() {
 		return idDocumento;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	identificativo fascicolo
+	 * @param idDocumento the idDocumento to set
 	 */
-	public final Integer getIdFascicolo() {
+	public void setIdDocumento(String idDocumento) {
+		this.idDocumento = idDocumento;
+	}
+
+	/**
+	 * @return the idFascicolo
+	 */
+	public Integer getIdFascicolo() {
 		return idFascicolo;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	identificativo nodo destinatario
+	 * @param idFascicolo the idFascicolo to set
 	 */
-	public final Integer getIdNodoDestinatario() {
+	public void setIdFascicolo(Integer idFascicolo) {
+		this.idFascicolo = idFascicolo;
+	}
+
+	/**
+	 * @return the idNodoDestinatario
+	 */
+	public Integer getIdNodoDestinatario() {
 		return idNodoDestinatario;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	identificativo utente destinatario
+	 * @param idNodoDestinatario the idNodoDestinatario to set
 	 */
-	public final Integer getIdUtenteDestinatario() {
+	public void setIdNodoDestinatario(Integer idNodoDestinatario) {
+		this.idNodoDestinatario = idNodoDestinatario;
+	}
+
+	/**
+	 * @return the idUtenteDestinatario
+	 */
+	public Integer getIdUtenteDestinatario() {
 		return idUtenteDestinatario;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	motivazione assegnazione
+	 * @param idUtenteDestinatario the idUtenteDestinatario to set
 	 */
-	public final String getMotivazioneAssegnazione() {
+	public void setIdUtenteDestinatario(Integer idUtenteDestinatario) {
+		this.idUtenteDestinatario = idUtenteDestinatario;
+	}
+
+	/**
+	 * @return the motivazioneAssegnazione
+	 */
+	public String getMotivazioneAssegnazione() {
 		return motivazioneAssegnazione;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	tipo operazione
+	 * @param motivazioneAssegnazione the motivazioneAssegnazione to set
 	 */
-	public final TipoOperazioneLibroFirmaEnum getOperazione() {
+	public void setMotivazioneAssegnazione(String motivazioneAssegnazione) {
+		this.motivazioneAssegnazione = motivazioneAssegnazione;
+	}
+
+	/**
+	 * @return the operazione
+	 */
+	public TipoOperazioneLibroFirmaEnum getOperazione() {
 		return operazione;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	coda
+	 * @param operazione the operazione to set
 	 */
-	public final DocumentQueueEnum getQueue() {
+	public void setOperazione(TipoOperazioneLibroFirmaEnum operazione) {
+		this.operazione = operazione;
+	}
+
+	/**
+	 * @return the queue
+	 */
+	public DocumentQueueEnum getQueue() {
 		return queue;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	subject
+	 * @param queue the queue to set
 	 */
-	public final String getSubject() {
+	public void setQueue(DocumentQueueEnum queue) {
+		this.queue = queue;
+	}
+
+	/**
+	 * @return the subject
+	 */
+	public String getSubject() {
 		return subject;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	identificativo tipo assegnazione
+	 * @param subject the subject to set
 	 */
-	public final Integer getTipoAssegnazioneId() {
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	/**
+	 * @return the tipoAssegnazioneId
+	 */
+	public Integer getTipoAssegnazioneId() {
 		return tipoAssegnazioneId;
 	}
 
 	/**
-	 * Getter.
-	 * 
-	 * @return	wob number
+	 * @param tipoAssegnazioneId the tipoAssegnazioneId to set
 	 */
-	public final String getWobNumber() {
+	public void setTipoAssegnazioneId(Integer tipoAssegnazioneId) {
+		this.tipoAssegnazioneId = tipoAssegnazioneId;
+	}
+
+	/**
+	 * @return the wobNumber
+	 */
+	public String getWobNumber() {
 		return wobNumber;
 	}
 
 	/**
-	 * Setter.
-	 * 
-	 * @param inQueue	coda
+	 * @param wobNumber the wobNumber to set
 	 */
-	public final void setQueue(final DocumentQueueEnum inQueue) {
-		this.queue = inQueue;
+	public void setWobNumber(String wobNumber) {
+		this.wobNumber = wobNumber;
 	}
 
 	/**
-	 * Gets the flag procedi da corriere.
-	 *
+	 * @return the flagRenderizzato
+	 */
+	public Boolean getFlagRenderizzato() {
+		return flagRenderizzato;
+	}
+
+	/**
+	 * @param flagRenderizzato the flagRenderizzato to set
+	 */
+	public void setFlagRenderizzato(Boolean flagRenderizzato) {
+		this.flagRenderizzato = flagRenderizzato;
+	}
+
+	/**
+	 * @return the urgente
+	 */
+	public Boolean getUrgente() {
+		return urgente;
+	}
+
+	/**
+	 * @param urgente the urgente to set
+	 */
+	public void setUrgente(Boolean urgente) {
+		this.urgente = urgente;
+	}
+
+	/**
 	 * @return the flagProcediDaCorriere
 	 */
 	public Boolean getFlagProcediDaCorriere() {
@@ -489,25 +572,23 @@ public class PEDocumentoDTO implements Serializable {
 	}
 
 	/**
-	 * Sets the flag procedi da corriere.
-	 *
-	 * @param inFlagProcediDaCorriere the flagProcediDaCorriere to set
+	 * @param flagProcediDaCorriere the flagProcediDaCorriere to set
 	 */
-	public void setFlagProcediDaCorriere(final Boolean inFlagProcediDaCorriere) {
-		this.flagProcediDaCorriere = inFlagProcediDaCorriere;
+	public void setFlagProcediDaCorriere(Boolean flagProcediDaCorriere) {
+		this.flagProcediDaCorriere = flagProcediDaCorriere;
 	}
 
 	/**
 	 * @return the responses
 	 */
-	public final String[] getResponses() {
+	public String[] getResponses() {
 		return responses;
 	}
 
 	/**
 	 * @param responses the responses to set
 	 */
-	public final void setResponses(String[] responses) {
+	public void setResponses(String[] responses) {
 		this.responses = responses;
 	}
 
@@ -539,4 +620,5 @@ public class PEDocumentoDTO implements Serializable {
 		this.notaDTO = notaDTO;
 	}
 
+	
 }
