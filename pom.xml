@@ -10,6 +10,10 @@
   <packaging>war</packaging>
   
   <properties>
+	
+	<!-- Servlet -->
+  	<javax.servlet.version>3.1.0</javax.servlet.version>
+  
 	<!-- Spring -->
 	<org.springframework.version>5.0.0.RELEASE</org.springframework.version>
 	
@@ -36,10 +40,21 @@
 	<logback.version>1.3.0-alpha4</logback.version><!-- ultima versione disponibile altrimenti non funziona il binding con slf4j -->
 	<slf4j.version>1.8.0-beta2</slf4j.version>
 	
+	<!-- JUnit -->
+	<junit.version>5.4.2</junit.version>
+	
   </properties>
   
   <dependencies>
   	
+  	<!-- Servlet -->
+  	<!-- Fondamentale per completare la compilazione -->
+  	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>${javax.servlet.version}</version>
+	    <scope>provided</scope>
+	</dependency>
   	
   	<!-- Spring -->
   	<dependency>
@@ -131,6 +146,21 @@
 	    <artifactId>logback-classic</artifactId>
 	    <version>${logback.version}</version>
 	</dependency>
+	
+	<!-- Junit/test -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>${org.springframework.version}</version>
+	    <scope>test</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.junit.jupiter</groupId>
+	    <artifactId>junit-jupiter-engine</artifactId>
+	    <version>${junit.version}</version>
+	    <scope>test</scope>
+	</dependency>
+	
   	
   </dependencies>	  
   
@@ -155,6 +185,11 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+      
+      <plugin>
+	    <artifactId>maven-surefire-plugin</artifactId>
+	    <version>3.0.0-M3</version>
+	  </plugin>
   
     </plugins>
     
