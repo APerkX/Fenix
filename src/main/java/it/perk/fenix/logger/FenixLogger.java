@@ -31,6 +31,10 @@ public class FenixLogger {
 		logger.info(msg);
 	}
 	
+	public void info(String msg, Exception e) {
+		logger.info(msg, e);
+	}
+	
 	public void error(String msg) {
 		logger.error(msg);
 	}

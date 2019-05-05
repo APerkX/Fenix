@@ -10,10 +10,23 @@
             <pattern>%d{HH:mm:ss.SSS} %-5level %logger{0} - %msg%n</pattern>
         </encoder>
     </appender>
+    
+    <!-- Integrazione con Bugsnag -->
+    <appender name="BUGSNAG" class="com.bugsnag.BugsnagAppender">
+	    <apiKey>7d85db376d36dad447361f155411272e</apiKey>
+	    <appType>Fenix-BE-WebApp</appType>
+	    <appVersion>0.0.1-alpha</appVersion>
+	    <releaseStage>development</releaseStage>
+	</appender>
+	
 
-    <root level="info">
+    <root level="INFO">
        <!--  <appender-ref ref="map"/> -->
         <appender-ref ref="STDOUT"/>
     </root>
+
+	<root level="INFO">
+	    <appender-ref ref="BUGSNAG"/>
+	</root>
 
 </configuration>

@@ -15,7 +15,7 @@
   	<javax.servlet.version>3.1.0</javax.servlet.version>
   
 	<!-- Spring -->
-	<org.springframework.version>5.0.0.RELEASE</org.springframework.version>
+	<org.springframework.version>5.1.6.RELEASE</org.springframework.version>
 	
 	<!-- marshalling -->
 	<jackson.version>2.9.8</jackson.version>
@@ -42,6 +42,9 @@
 	
 	<!-- JUnit -->
 	<junit.version>5.4.2</junit.version>
+
+	<!-- Bugsnag -->
+	<bugsnag.version>[3.0,4.0)</bugsnag.version>
 	
   </properties>
   
@@ -161,6 +164,12 @@
 	    <scope>test</scope>
 	</dependency>
 	
+	<!-- Bugsnag -->
+	<dependency>
+		<groupId>com.bugsnag</groupId>
+		<artifactId>bugsnag-spring</artifactId>
+		<version>${bugsnag.version}</version>
+	</dependency>
   	
   </dependencies>	  
   

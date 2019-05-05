@@ -12,7 +12,10 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.bugsnag.Bugsnag;
 
 import it.perk.fenix.dto.RuoloDTO;
 import it.perk.fenix.dto.UfficiRuoliDTO;
@@ -47,6 +50,10 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 	 * Predefinito.
 	 */
 	private static final Long PREDEFINITO = 1L;
+	
+	@Autowired
+	private Bugsnag bugsnag;
+
 	
 	
 	@Override
@@ -83,6 +90,8 @@ public class UtenteDAO extends AbstractJpaDAO<Utente> implements IUtenteDAO {
 				}
 				
 			}
+			
+//			LOGGER.info("Qualcosa è andato Storto", new RuntimeException("Non-fatal"));
 			
 		} catch (NoResultException e) {
 			LOGGER.warn("L'utente richiesto non è censito dall'applicazione --> " + username, e);

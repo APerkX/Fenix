@@ -51,7 +51,7 @@ public class UtenteSRV implements IUtenteSRV {
 			utente = utenteDao.getByUsername(username);
 		} catch (ResourceNotFoundException e) {
 			LOGGER.warn("L'utente richiesto non è censito dall'applicazione --> " + username, e);
-			throw new FenixException("L'utente richiesto non è censito dall'applicativo", e);
+			throw new ResourceNotFoundException("L'utente richiesto non è censito dall'applicativo", e);
 		} catch (Exception e) {
 			LOGGER.error("Errore durante la ricerca dell'utente : " + username , e);
 			throw new FenixException("Errore durante la ricerca dell'utente : " + username, e);

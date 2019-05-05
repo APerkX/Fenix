@@ -17,6 +17,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.google.common.base.Preconditions;
 
 import it.perk.fenix.dto.UtenteDTO;
+import it.perk.fenix.exception.ResourceNotFoundException;
+import it.perk.fenix.logger.FenixLogger;
 import it.perk.fenix.model.entity.Utente;
 import it.perk.fenix.service.facade.IUtenteFacadeSRV;
 
@@ -27,6 +29,11 @@ import it.perk.fenix.service.facade.IUtenteFacadeSRV;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+	
+	/**
+	 * Logger.
+	 */
+	private static final FenixLogger LOGGER = FenixLogger.getLogger(UserController.class.getName());
 	
 	@Autowired
 	private IUtenteFacadeSRV utenteSRV;
@@ -57,8 +64,13 @@ public class UserController {
 			
 			UtenteDTO utente = utenteSRV.getByUsername(sb.toString());
 			return Preconditions.checkNotNull(utente);
-		} catch (Exception e) {
+			
+		} catch (ResourceNotFoundException e) {
+			LOGGER.warn("L'utente richiesto non è censito dall'applicazione --> " + username, e);
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+		} catch (Exception e) {
+			LOGGER.error("Errore durante la ricerca dell'utente", e);
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
 	
