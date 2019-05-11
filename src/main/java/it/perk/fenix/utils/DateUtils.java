@@ -112,8 +112,7 @@ public class DateUtils {
 			SimpleDateFormat dateStandard = null;
 			Date d = null;
 			try {
-				dateStandard = new SimpleDateFormat(
-						"EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+				dateStandard = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
 				d = dateStandard.parse(data);
 			} catch (ParseException e) {
 				throw new FenixException("Errore nella formattazione della data. " + e.getMessage());
