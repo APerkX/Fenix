@@ -4,6 +4,7 @@
 package it.perk.fenix.test.config;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import it.perk.fenix.constants.BeanTestJunit;
@@ -12,6 +13,7 @@ import it.perk.fenix.constants.BeanTestJunit;
  * @author Perk
  *
  */
+@Disabled
 public class TestProva {
 	
 	private BeanTestJunit bean = new BeanTestJunit(); 
