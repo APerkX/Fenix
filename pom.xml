@@ -46,6 +46,9 @@
 	<!-- Bugsnag -->
 	<bugsnag.version>[3.0,4.0)</bugsnag.version>
 	
+	<!-- Encoding utilizzato dal plugin interno di maven 'maven-resources-plugin'   -->
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	
   </properties>
   
   <dependencies>
