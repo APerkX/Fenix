@@ -11,7 +11,7 @@
   
   <properties>
 	<!-- Spring -->
-	<org.springframework.version>5.0.0.RELEASE</org.springframework.version>
+	<org.springframework.version>5.3.18</org.springframework.version>
 	
 	<!-- marshalling -->
 	<jackson.version>2.9.8</jackson.version>
